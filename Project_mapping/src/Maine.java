@@ -5,6 +5,7 @@ public class Maine {
 		// TODO Auto-generated method stub
 		createRDF rdf= new createRDF();
 			rdf.calcule();
+			System.out.println("force update !! ");
 
 	}
 
