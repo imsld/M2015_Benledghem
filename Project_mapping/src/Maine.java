@@ -6,6 +6,7 @@ public class Maine {
 		createRDF rdf= new createRDF();
 			rdf.calcule();
 			System.out.println("force update !! ");
+			System.out.println("force update !!!!!!!!!!!!! ");
 
 	}
 
