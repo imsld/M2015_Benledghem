@@ -1,0 +1,595 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY untitled-ontology-67 "http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.w3.org/2002/07/owl"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:untitled-ontology-67="http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <Ontology rdf:about="http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#aEnfant -->
+
+    <ObjectProperty rdf:about="&untitled-ontology-67;aEnfant">
+        <rdfs:domain rdf:resource="&untitled-ontology-67;Personne"/>
+        <rdfs:range rdf:resource="&untitled-ontology-67;Personne"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#aMere -->
+
+    <ObjectProperty rdf:about="&untitled-ontology-67;aMere">
+        <rdfs:range rdf:resource="&untitled-ontology-67;Femme"/>
+        <rdfs:domain rdf:resource="&untitled-ontology-67;Personne"/>
+        <rdfs:subPropertyOf rdf:resource="&untitled-ontology-67;aParent"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#aParent -->
+
+    <ObjectProperty rdf:about="&untitled-ontology-67;aParent">
+        <rdfs:domain rdf:resource="&untitled-ontology-67;Personne"/>
+        <rdfs:range rdf:resource="&untitled-ontology-67;Personne"/>
+        <inverseOf rdf:resource="&untitled-ontology-67;aEnfant"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#aPere -->
+
+    <ObjectProperty rdf:about="&untitled-ontology-67;aPere">
+        <rdfs:range rdf:resource="&untitled-ontology-67;Homme"/>
+        <rdfs:domain rdf:resource="&untitled-ontology-67;Personne"/>
+        <rdfs:subPropertyOf rdf:resource="&untitled-ontology-67;aParent"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#marieAvec -->
+
+    <ObjectProperty rdf:about="&untitled-ontology-67;marieAvec">
+        <rdfs:range rdf:resource="&untitled-ontology-67;Femme"/>
+        <rdfs:domain rdf:resource="&untitled-ontology-67;Homme"/>
+        <inverseOf rdf:resource="&untitled-ontology-67;marieeAvec"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#marieeAvec -->
+
+    <ObjectProperty rdf:about="&untitled-ontology-67;marieeAvec">
+        <rdfs:domain rdf:resource="&untitled-ontology-67;Femme"/>
+        <rdfs:range rdf:resource="&untitled-ontology-67;Homme"/>
+    </ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#estLeDefunt -->
+
+    <DatatypeProperty rdf:about="&untitled-ontology-67;estLeDefunt"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#Defunt -->
+
+    <Class rdf:about="&untitled-ontology-67;Defunt">
+        <equivalentClass>
+            <Class>
+                <intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&untitled-ontology-67;Homme"/>
+                    <Restriction>
+                        <onProperty rdf:resource="&untitled-ontology-67;estLeDefunt"/>
+                        <someValuesFrom rdf:resource="&xsd;int"/>
+                    </Restriction>
+                </intersectionOf>
+            </Class>
+        </equivalentClass>
+        <rdfs:subClassOf rdf:resource="&untitled-ontology-67;Personne"/>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#Defunte -->
+
+    <Class rdf:about="&untitled-ontology-67;Defunte">
+        <equivalentClass>
+            <Class>
+                <intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&untitled-ontology-67;Femme"/>
+                    <Restriction>
+                        <onProperty rdf:resource="&untitled-ontology-67;estLeDefunt"/>
+                        <someValuesFrom rdf:resource="&xsd;int"/>
+                    </Restriction>
+                </intersectionOf>
+            </Class>
+        </equivalentClass>
+        <rdfs:subClassOf rdf:resource="&untitled-ontology-67;Personne"/>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#Epouse -->
+
+    <Class rdf:about="&untitled-ontology-67;Epouse">
+        <equivalentClass>
+            <Restriction>
+                <onProperty rdf:resource="&untitled-ontology-67;marieeAvec"/>
+                <someValuesFrom rdf:resource="&untitled-ontology-67;Defunt"/>
+            </Restriction>
+        </equivalentClass>
+        <rdfs:subClassOf rdf:resource="&untitled-ontology-67;Femme"/>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#Epoux -->
+
+    <Class rdf:about="&untitled-ontology-67;Epoux">
+        <rdfs:subClassOf rdf:resource="&untitled-ontology-67;Homme"/>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#Femme -->
+
+    <Class rdf:about="&untitled-ontology-67;Femme">
+        <rdfs:subClassOf rdf:resource="&untitled-ontology-67;Personne"/>
+        <disjointWith rdf:resource="&untitled-ontology-67;Homme"/>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#Fille -->
+
+    <Class rdf:about="&untitled-ontology-67;Fille">
+        <equivalentClass>
+            <Class>
+                <intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&untitled-ontology-67;Femme"/>
+                    <Restriction>
+                        <onProperty rdf:resource="&untitled-ontology-67;aParent"/>
+                        <someValuesFrom rdf:resource="&untitled-ontology-67;Defunt"/>
+                    </Restriction>
+                </intersectionOf>
+            </Class>
+        </equivalentClass>
+        <rdfs:subClassOf rdf:resource="&untitled-ontology-67;LesFilles"/>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#FilleDuFils -->
+
+    <Class rdf:about="&untitled-ontology-67;FilleDuFils">
+        <equivalentClass>
+            <Class>
+                <intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&untitled-ontology-67;Femme"/>
+                    <Restriction>
+                        <onProperty rdf:resource="&untitled-ontology-67;aParent"/>
+                        <someValuesFrom rdf:resource="&untitled-ontology-67;Fils"/>
+                    </Restriction>
+                </intersectionOf>
+            </Class>
+        </equivalentClass>
+        <rdfs:subClassOf rdf:resource="&untitled-ontology-67;LesFilles"/>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#Fils -->
+
+    <Class rdf:about="&untitled-ontology-67;Fils">
+        <equivalentClass>
+            <Class>
+                <intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&untitled-ontology-67;Homme"/>
+                    <Restriction>
+                        <onProperty rdf:resource="&untitled-ontology-67;aParent"/>
+                        <someValuesFrom rdf:resource="&untitled-ontology-67;Defunt"/>
+                    </Restriction>
+                </intersectionOf>
+            </Class>
+        </equivalentClass>
+        <rdfs:subClassOf rdf:resource="&untitled-ontology-67;LesFils"/>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#FilsDuFils -->
+
+    <Class rdf:about="&untitled-ontology-67;FilsDuFils">
+        <equivalentClass>
+            <Class>
+                <intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&untitled-ontology-67;Homme"/>
+                    <Restriction>
+                        <onProperty rdf:resource="&untitled-ontology-67;aParent"/>
+                        <someValuesFrom rdf:resource="&untitled-ontology-67;Fils"/>
+                    </Restriction>
+                </intersectionOf>
+            </Class>
+        </equivalentClass>
+        <rdfs:subClassOf rdf:resource="&untitled-ontology-67;LesFils"/>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#FilsDuFrere -->
+
+    <Class rdf:about="&untitled-ontology-67;FilsDuFrere">
+        <rdfs:subClassOf rdf:resource="&untitled-ontology-67;Frere"/>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#FilsDuFrereDuMemePere -->
+
+    <Class rdf:about="&untitled-ontology-67;FilsDuFrereDuMemePere">
+        <rdfs:subClassOf rdf:resource="&untitled-ontology-67;FrereDuMemePere"/>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#FilsOnclePaternel -->
+
+    <Class rdf:about="&untitled-ontology-67;FilsOnclePaternel">
+        <rdfs:subClassOf rdf:resource="&untitled-ontology-67;OnclePaternel"/>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#FilsOnclePaternelDuMemePere -->
+
+    <Class rdf:about="&untitled-ontology-67;FilsOnclePaternelDuMemePere">
+        <rdfs:subClassOf rdf:resource="&untitled-ontology-67;OnclePaternelDuMemePere"/>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#Frere -->
+
+    <Class rdf:about="&untitled-ontology-67;Frere">
+        <rdfs:subClassOf rdf:resource="&untitled-ontology-67;LesFreres"/>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#FrereDeMemeMere -->
+
+    <Class rdf:about="&untitled-ontology-67;FrereDeMemeMere">
+        <rdfs:subClassOf rdf:resource="&untitled-ontology-67;LesFreres"/>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#FrereDuMemePere -->
+
+    <Class rdf:about="&untitled-ontology-67;FrereDuMemePere">
+        <rdfs:subClassOf rdf:resource="&untitled-ontology-67;LesFreres"/>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#Homme -->
+
+    <Class rdf:about="&untitled-ontology-67;Homme">
+        <rdfs:subClassOf rdf:resource="&untitled-ontology-67;Personne"/>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#LesFilles -->
+
+    <Class rdf:about="&untitled-ontology-67;LesFilles">
+        <rdfs:subClassOf rdf:resource="&untitled-ontology-67;Femme"/>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#LesFils -->
+
+    <Class rdf:about="&untitled-ontology-67;LesFils">
+        <rdfs:subClassOf rdf:resource="&untitled-ontology-67;Homme"/>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#LesFreres -->
+
+    <Class rdf:about="&untitled-ontology-67;LesFreres">
+        <rdfs:subClassOf rdf:resource="&untitled-ontology-67;Homme"/>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#LesMeres -->
+
+    <Class rdf:about="&untitled-ontology-67;LesMeres">
+        <rdfs:subClassOf rdf:resource="&untitled-ontology-67;Femme"/>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#LesOncles -->
+
+    <Class rdf:about="&untitled-ontology-67;LesOncles">
+        <rdfs:subClassOf rdf:resource="&untitled-ontology-67;Homme"/>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#LesPeres -->
+
+    <Class rdf:about="&untitled-ontology-67;LesPeres">
+        <rdfs:subClassOf rdf:resource="&untitled-ontology-67;Homme"/>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#LesSoeurs -->
+
+    <Class rdf:about="&untitled-ontology-67;LesSoeurs">
+        <rdfs:subClassOf rdf:resource="&untitled-ontology-67;Femme"/>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#Mere -->
+
+    <Class rdf:about="&untitled-ontology-67;Mere">
+        <equivalentClass>
+            <Class>
+                <intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&untitled-ontology-67;Femme"/>
+                    <Restriction>
+                        <onProperty rdf:resource="&untitled-ontology-67;aEnfant"/>
+                        <someValuesFrom rdf:resource="&untitled-ontology-67;Defunt"/>
+                    </Restriction>
+                </intersectionOf>
+            </Class>
+        </equivalentClass>
+        <rdfs:subClassOf rdf:resource="&untitled-ontology-67;LesMeres"/>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#MereDeLaMere -->
+
+    <Class rdf:about="&untitled-ontology-67;MereDeLaMere">
+        <equivalentClass>
+            <Class>
+                <intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&untitled-ontology-67;Femme"/>
+                    <Restriction>
+                        <onProperty rdf:resource="&untitled-ontology-67;aEnfant"/>
+                        <someValuesFrom rdf:resource="&untitled-ontology-67;Mere"/>
+                    </Restriction>
+                </intersectionOf>
+            </Class>
+        </equivalentClass>
+        <rdfs:subClassOf rdf:resource="&untitled-ontology-67;LesMeres"/>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#MereDuPere -->
+
+    <Class rdf:about="&untitled-ontology-67;MereDuPere">
+        <equivalentClass>
+            <Class>
+                <intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&untitled-ontology-67;Femme"/>
+                    <Restriction>
+                        <onProperty rdf:resource="&untitled-ontology-67;aEnfant"/>
+                        <someValuesFrom rdf:resource="&untitled-ontology-67;Pere"/>
+                    </Restriction>
+                </intersectionOf>
+            </Class>
+        </equivalentClass>
+        <rdfs:subClassOf rdf:resource="&untitled-ontology-67;LesMeres"/>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#OnclePaternel -->
+
+    <Class rdf:about="&untitled-ontology-67;OnclePaternel">
+        <rdfs:subClassOf rdf:resource="&untitled-ontology-67;LesOncles"/>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#OnclePaternelDuMemePere -->
+
+    <Class rdf:about="&untitled-ontology-67;OnclePaternelDuMemePere">
+        <rdfs:subClassOf rdf:resource="&untitled-ontology-67;LesOncles"/>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#ParentAscendant -->
+
+    <Class rdf:about="&untitled-ontology-67;ParentAscendant">
+        <equivalentClass>
+            <Class>
+                <unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&untitled-ontology-67;LesMeres"/>
+                    <rdf:Description rdf:about="&untitled-ontology-67;LesOncles"/>
+                    <rdf:Description rdf:about="&untitled-ontology-67;LesPeres"/>
+                </unionOf>
+            </Class>
+        </equivalentClass>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#ParentCollateral -->
+
+    <Class rdf:about="&untitled-ontology-67;ParentCollateral">
+        <equivalentClass>
+            <Class>
+                <unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&untitled-ontology-67;LesFreres"/>
+                    <rdf:Description rdf:about="&untitled-ontology-67;LesSoeurs"/>
+                </unionOf>
+            </Class>
+        </equivalentClass>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#ParentDescendant -->
+
+    <Class rdf:about="&untitled-ontology-67;ParentDescendant">
+        <equivalentClass>
+            <Class>
+                <unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&untitled-ontology-67;LesFilles"/>
+                    <rdf:Description rdf:about="&untitled-ontology-67;LesFils"/>
+                </unionOf>
+            </Class>
+        </equivalentClass>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#Pere -->
+
+    <Class rdf:about="&untitled-ontology-67;Pere">
+        <equivalentClass>
+            <Class>
+                <intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&untitled-ontology-67;Homme"/>
+                    <Restriction>
+                        <onProperty rdf:resource="&untitled-ontology-67;aEnfant"/>
+                        <someValuesFrom rdf:resource="&untitled-ontology-67;Defunt"/>
+                    </Restriction>
+                </intersectionOf>
+            </Class>
+        </equivalentClass>
+        <rdfs:subClassOf rdf:resource="&untitled-ontology-67;LesPeres"/>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#PereDuPere -->
+
+    <Class rdf:about="&untitled-ontology-67;PereDuPere">
+        <equivalentClass>
+            <Class>
+                <intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&untitled-ontology-67;Homme"/>
+                    <Restriction>
+                        <onProperty rdf:resource="&untitled-ontology-67;aEnfant"/>
+                        <someValuesFrom rdf:resource="&untitled-ontology-67;Pere"/>
+                    </Restriction>
+                </intersectionOf>
+            </Class>
+        </equivalentClass>
+        <rdfs:subClassOf rdf:resource="&untitled-ontology-67;LesPeres"/>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#Personne -->
+
+    <Class rdf:about="&untitled-ontology-67;Personne"/>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#Soeur -->
+
+    <Class rdf:about="&untitled-ontology-67;Soeur">
+        <rdfs:subClassOf rdf:resource="&untitled-ontology-67;LesSoeurs"/>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#SoeurDeMemeMere -->
+
+    <Class rdf:about="&untitled-ontology-67;SoeurDeMemeMere">
+        <rdfs:subClassOf rdf:resource="&untitled-ontology-67;LesSoeurs"/>
+    </Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#SoeurDuMemePere -->
+
+    <Class rdf:about="&untitled-ontology-67;SoeurDuMemePere">
+        <rdfs:subClassOf rdf:resource="&untitled-ontology-67;LesSoeurs"/>
+    </Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/3/14/untitled-ontology-67#Ali -->
+
+    <NamedIndividual rdf:about="&untitled-ontology-67;Ali">
+        <rdf:type rdf:resource="&untitled-ontology-67;Homme"/>
+        <untitled-ontology-67:estLeDefunt rdf:datatype="&xsd;int">1</untitled-ontology-67:estLeDefunt>
+    </NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net -->
+

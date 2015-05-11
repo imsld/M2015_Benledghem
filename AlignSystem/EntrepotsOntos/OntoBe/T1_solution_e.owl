@@ -1,0 +1,157 @@
+@prefix : <http://www.semanticweb.org/owl/owlapi/turtle#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix : <http://exemple.teluq.ca/thesaurus-t1/>.
+
+@base <http://licef.teluq.uquebec.ca/thesaurus1> .
+
+
+<http://licef.teluq.uquebec.ca/thesaurus1> rdf:type owl:Ontology ;
+                                             owl:imports <http://www.w3.org/2004/02/skos/core> .
+
+
+###  http://exemple.teluq.ca/thesaurus-t1/c1
+
+<http://exemple.teluq.ca/thesaurus-t1/c1> rdf:type skos:Concept ;
+                                                                 
+                                                                 skos:prefLabel "Knowledge modeling"@en ,
+                                                                                "Modélisation des connaissances"@fr ;
+                                                                 
+                                                                 skos:closeMatch <http://data.bnf.fr/ark:/12148/cb11991261q> ;
+                                                                 
+                                                                 skos:narrower <http://exemple.teluq.ca/thesaurus-t1/c2> .
+
+
+
+###  http://exemple.teluq.ca/thesaurus-t1/c10
+
+<http://exemple.teluq.ca/thesaurus-t1/c10> rdf:type skos:Concept ;
+                                                                  
+                                                                  skos:prefLabel "G-MOT"@en ,
+                                                                                 "G-MOT"@fr ;
+                                                                  
+                                                                  skos:broader <http://exemple.teluq.ca/thesaurus-t1/c4> .
+
+
+
+###  http://exemple.teluq.ca/thesaurus-t1/c2
+
+<http://exemple.teluq.ca/thesaurus-t1/c2> rdf:type skos:Concept ;
+                                                                 
+                                                                 skos:prefLabel "Semantic Models"@en ,
+                                                                                "Modèles sémantiques"@fr ;
+                                                                 
+                                                                 skos:narrowMatch <http://data.bnf.fr/ark:/12148/cb155081885> ;
+                                                                 
+                                                                 skos:broader <http://exemple.teluq.ca/thesaurus-t1/c1> ;
+                                                                 
+                                                                 skos:narrower <http://exemple.teluq.ca/thesaurus-t1/c6> .
+
+
+
+###  http://exemple.teluq.ca/thesaurus-t1/c3
+
+<http://exemple.teluq.ca/thesaurus-t1/c3> rdf:type skos:Concept ;
+                                                                 
+                                                                 skos:prefLabel "Knowledge modeling languages"@en ,
+                                                                                "Langages de modélisation des connaissances"@fr ;
+                                                                 
+                                                                 skos:related <http://exemple.teluq.ca/thesaurus-t1/c1> ;
+                                                                 
+                                                                 skos:narrower <http://exemple.teluq.ca/thesaurus-t1/c5> .
+
+
+
+###  http://exemple.teluq.ca/thesaurus-t1/c4
+
+<http://exemple.teluq.ca/thesaurus-t1/c4> rdf:type skos:Concept ;
+                                                                 
+                                                                 skos:prefLabel "Knowledge modeling software"@en ,
+                                                                                "Logiciels de modélisation des connaissances "@fr ;
+                                                                 
+                                                                 skos:broadMatch <http://data.bnf.fr/ark:/12148/cb133183707> ;
+                                                                 
+                                                                 skos:related <http://exemple.teluq.ca/thesaurus-t1/c1> ;
+                                                                 
+                                                                 skos:narrower <http://exemple.teluq.ca/thesaurus-t1/c10> .
+
+
+
+###  http://exemple.teluq.ca/thesaurus-t1/c5
+
+<http://exemple.teluq.ca/thesaurus-t1/c5> rdf:type skos:Concept ;
+                                                                 
+                                                                 skos:prefLabel "Semantic Web Languages"@en ,
+                                                                                "Langages du web sémantique "@fr ;
+                                                                 
+                                                                 skos:relatedMatch <http://data.bnf.fr/ark:/12148/cb14521343b> ;
+                                                                 
+                                                                 skos:broader <http://exemple.teluq.ca/thesaurus-t1/c3> ;
+                                                                 
+                                                                 skos:narrower <http://exemple.teluq.ca/thesaurus-t1/c7> ,
+                                                                               <http://exemple.teluq.ca/thesaurus-t1/c8> .
+
+
+
+###  http://exemple.teluq.ca/thesaurus-t1/c6
+
+<http://exemple.teluq.ca/thesaurus-t1/c6> rdf:type skos:Concept ;
+                                                                 
+                                                                 skos:prefLabel "RDF Vocabularies"@en ,
+                                                                                "Vocabulaires RDF"@fr ;
+                                                                 
+                                                                 skos:relatedMatch <http://data.bnf.fr/ark:/12148/cb14521343b> ;
+                                                                 
+                                                                 skos:broadMatch <http://data.bnf.fr/ark:/12148/cb155081885> ;
+                                                                 
+                                                                 skos:broader <http://exemple.teluq.ca/thesaurus-t1/c2> ;
+                                                                 
+                                                                 skos:narrower <http://exemple.teluq.ca/thesaurus-t1/c9> .
+
+
+
+###  http://exemple.teluq.ca/thesaurus-t1/c7
+
+<http://exemple.teluq.ca/thesaurus-t1/c7> rdf:type skos:Concept ;
+                                                                 
+                                                                 skos:prefLabel "RDFS"@en ,
+                                                                                "RDFS"@fr ;
+                                                                 
+                                                                 skos:relatedMatch <http://data.bnf.fr/ark:/12148/cb14521343b> ;
+                                                                 
+                                                                 skos:broader <http://exemple.teluq.ca/thesaurus-t1/c5> .
+
+
+
+###  http://exemple.teluq.ca/thesaurus-t1/c8
+
+<http://exemple.teluq.ca/thesaurus-t1/c8> rdf:type skos:Concept ;
+                                                                 
+                                                                 skos:prefLabel "OWL"@en ,
+                                                                                "OWL"@fr ;
+                                                                 
+                                                                 skos:relatedMatch <http://data.bnf.fr/ark:/12148/cb14521343b> ;
+                                                                 
+                                                                 skos:broader <http://exemple.teluq.ca/thesaurus-t1/c5> .
+
+
+
+###  http://exemple.teluq.ca/thesaurus-t1/c9
+
+<http://exemple.teluq.ca/thesaurus-t1/c9> rdf:type skos:Concept ;
+                                                                 
+                                                                 skos:prefLabel "FOAF"@en ,
+                                                                                "FOAF"@fr ;
+                                                                 
+                                                                 skos:relatedMatch <http://data.bnf.fr/ark:/12148/cb14521343b> ;
+                                                                 
+                                                                 skos:broader <http://exemple.teluq.ca/thesaurus-t1/c6> .
+
+
+
+
+
