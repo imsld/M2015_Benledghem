@@ -10,7 +10,7 @@ import org.eclipse.ui.PlatformUI;
  * This class controls all aspects of the application's execution
  */
 public class Acceuil implements IApplication {
-	public static String path = "C:/Users/Rafif/workspace/AlignSystem/EntrepotsOntos";
+	public static String path = "C:/Users/Ismail/git/AlignSystem/AlignSystem/EntrepotsOntos";
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.equinox.app.IApplication#start(org.eclipse.equinox.app.IApplicationContext)

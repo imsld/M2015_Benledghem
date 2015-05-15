@@ -17,6 +17,7 @@ import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 import org.pfe.mapping.interfaces.Acceuil;
@@ -51,6 +52,7 @@ public class ViewOntoRepositories extends ViewPart {
 		IWorkbenchPage page = PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage();
 		
+		
 		tree.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				TreeItem item = (TreeItem) e.item;
@@ -58,6 +60,14 @@ public class ViewOntoRepositories extends ViewPart {
 				
 				if(!fileNameOnto.contains(".owl")){
 					IViewPart view1 = page.findView(ViewAlignement.ID);
+					
+					try {
+						page.showView(ViewAlignement.ID);
+					} catch (PartInitException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
 					String s = item.getText();
 					s = s.substring(0,s.indexOf(" ("));
 					s = Acceuil.path + "/" + s;
