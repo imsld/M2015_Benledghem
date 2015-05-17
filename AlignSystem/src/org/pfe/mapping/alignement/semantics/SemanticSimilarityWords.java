@@ -16,14 +16,14 @@ import edu.cmu.lti.ws4j.util.WS4JConfiguration;
 
 public class SemanticSimilarityWords {
 
-	public static String HirstStOnge = "HirstStOnge";
-	public static String LeacockChodorow = "LeacockChodorow";
-	public static String Lesk = "Lesk";
-	public static String WuPalmer = "WuPalmer";
-	public static String Resnik = "Resnik";
-	public static String JiangConrath = "JiangConrath";
-	public static String Lin = "Lin";
-	public static String Path = "Path";
+	public final static String HirstStOnge = "HirstStOnge";
+	public final static String LeacockChodorow = "LeacockChodorow";
+	public final static String Lesk = "Lesk";
+	public final static String WuPalmer = "WuPalmer";
+	public final static String Resnik = "Resnik";
+	public final static String JiangConrath = "JiangConrath";
+	public final static String Lin = "Lin";
+	public final static String Path = "Path";
 	
 	private ILexicalDatabase db = new NictWordNet();
 

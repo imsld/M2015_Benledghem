@@ -16,9 +16,9 @@ public class SemanticSimilaritySentences {
 	private Metrics m = new Metrics();
 	private RBFRegressor rss = null;
 
-	public static String FastMethod = "FastMethod";
+	public final static String FastMethod = "FastMethod";
 	// public static String NeuroneNetWork = "NeuroneNetWork";
-	public static String calculateRBFSimilarity = "calculateRBFSimilarity";
+	public final static String calculateRBFSimilarity = "calculateRBFSimilarity";
 
 	private Instance instanceMaker(String in) {
 
