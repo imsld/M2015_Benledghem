@@ -1,5 +1,9 @@
 package org.pfe.mapping.alignement;
 
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+
 import org.eclipse.swt.graphics.Device;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.ProgressBar;
@@ -10,6 +14,7 @@ import org.pfe.ontologie.Ontologie;
 import org.pfe.mapping.alignement.semantics.SemanticSimilaritySentences;
 import org.pfe.mapping.alignement.semantics.SemanticSimilarityWords;
 import org.pfe.mapping.interfaces.views.ViewAlignement;
+import org.pfe.mapping.interfaces.views.tables.ViewAlignementResultOnglet;
 
 public class Alignement extends Thread {
 	private String o1_path;
@@ -30,13 +35,17 @@ public class Alignement extends Thread {
 	private Display display;
 	private ProgressBar progressBar;
 	private int total;
+	private List<List<String>> list;
+	ViewAlignementResultOnglet ropertiesOnglet;
+	double pond_ling, pond_hier;
 
 	double s;
-	
-	
+
 	public Alignement(String o1_path, String o2_path, String methodWord,
 			String methodSentence, ViewAlignement viewLocal, Display display,
-			ProgressBar progressBar) {
+			ProgressBar progressBar, List<List<String>> list, String pond_ling,
+			String pond_hier, ViewAlignementResultOnglet ropertiesOnglet) {
+
 		super();
 		this.o1_path = o1_path;
 		this.o2_path = o2_path;
@@ -51,41 +60,39 @@ public class Alignement extends Thread {
 		this.progressBar.setMinimum(0);
 		total = onto_1.getConceptCout() * onto_2.getConceptCout();
 		this.progressBar.setMaximum(total);
+
+		this.list = list;
+		this.ropertiesOnglet = ropertiesOnglet;
+		this.pond_ling = Double.parseDouble(pond_ling);
+		this.pond_hier = Double.parseDouble(pond_hier);
 	}
 
 	public void run() {
 		cdm1 = new ConceptDataModel(onto_1.getConceptDataList());
 		cdm2 = new ConceptDataModel(onto_2.getConceptDataList());
 		String cpt1, cpt2;
-		double score, score1;
-		
-		int index_1 = -1, index_2 = -1;
+		double score_ling, score_hier = 0, score_Sem = 0;
 
 		for (ConceptInformation concept_1 : cdm1.getData()) {
 			cpt1 = concept_1.getConcept();
-
-			index_2 = -1;
-			score = 0;
-			score1 = 0;
+			List<List<String>> Concept1_childList = onto_1
+					.getChildList(concept_1.getIRI());
 
 			for (ConceptInformation concept_2 : cdm2.getData()) {
 				cpt2 = concept_2.getConcept();
-				index_2++;
+				List<List<String>> Concept2_childList = onto_2
+						.getChildList(concept_2.getIRI());
 
-				if (cpt1.contains(" ") || cpt2.contains(" "))
-					score1 = SSS.getScoresentences(cpt1, cpt2, methodSentence);
-				else
-					score1 = SSW.getScoreWords(cpt1, cpt2, methodWord);
+				score_ling = getLinguisticScore(cpt1, cpt2);
+				score_hier = (score_ling + getHierachicScore(
+						Concept1_childList, Concept2_childList)) / 2;
+				score_Sem = ((score_ling*pond_ling) + (score_hier*pond_hier));
 
-				if (score1 > score) {
-					score = score1;
-					index_1 = index_2;
-				}
-				s = score1;
-				/*try {
-					Thread.sleep(10);
-				} catch (InterruptedException e) {
-				}*/
+				s = score_ling;
+				list.add(Arrays.asList(concept_1.getConcept(),
+						concept_2.getConcept(), Double.toString(score_ling),
+						Double.toString(score_hier), Double.toString(score_Sem)));
+
 				display.syncExec(new Runnable() {
 					public void run() {
 						if (progressBar.isDisposed())
@@ -94,26 +101,53 @@ public class Alignement extends Thread {
 						viewLocal.text_1.setText(concept_1.getConcept());
 						viewLocal.text_2.setText(concept_2.getConcept());
 						viewLocal.text_3.setText(Double.toString(s));
+						ropertiesOnglet.updateOngletResultatInterface();
+
 					}
 				});
-
-			}
-			if (index_1 != -1) {
-				concept_1.setConceptEquivalent(cdm2.getData().get(index_1)
-						.getConcept());
-				concept_1.setIriEquivalent(cdm2.getData().get(index_1)
-						.getConcept());
-				concept_1
-						.setIriEquivalent(cdm2.getData().get(index_1).getIRI());
-				concept_1.setScore(score);
-
-				System.out.println("concept :" + concept_1.getConcept()
-						+ " concept equivalent :"
-						+ concept_1.getConceptEquivalent() + " score "
-						+ concept_1.getScore());
 			}
 
 		}
 
+	}
+
+	private double getHierachicScore(List<List<String>> concept1_childList,
+			List<List<String>> concept2_childList) {
+		if (concept1_childList.size() == 0 || concept2_childList.size() == 0)
+			return 0;
+		double val = 0, max = 0, somme = 0;
+		for (Iterator iterator = concept1_childList.iterator(); iterator
+				.hasNext();) {
+			List<String> list = (List<String>) iterator.next();
+			String cpt1_Child = list.get(0);
+			for (Iterator iterator2 = concept2_childList.iterator(); iterator2
+					.hasNext();) {
+				List<String> list2 = (List<String>) iterator2.next();
+				String cpt2_Child = list2.get(0);
+				val = getLinguisticScore(cpt1_Child, cpt2_Child);
+				if (val > max)
+					max = val;
+			}
+			somme += max;
+			max = 0;
+		}
+		return somme / (concept1_childList.size());
+	}
+
+	private double getLinguisticScore(String cpt1, String cpt2) {
+		if (cpt1.equals(cpt2))
+			return 1;
+		else {
+			if (cpt1.equals("Scientific_Event"))
+				System.out.println(cpt1 + " " + cpt2);
+			cpt1 = cpt1.replace("_", " ");
+			cpt2 = cpt2.replace("_", " ");
+
+			if (cpt1.contains(" ") || cpt2.contains(" ")) {
+				System.out.println(cpt1 + " " + cpt2);
+				return SSS.getScoresentences(cpt1, cpt2, methodSentence);
+			} else
+				return SSW.getScoreWords(cpt1, cpt2, methodWord);
+		}
 	}
 }

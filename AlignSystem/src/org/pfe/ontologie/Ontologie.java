@@ -1,9 +1,12 @@
 package org.pfe.ontologie;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import com.hp.hpl.jena.ontology.Individual;
+import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.ontology.OntModelSpec;
 import com.hp.hpl.jena.ontology.Ontology;
@@ -23,6 +26,7 @@ public class Ontologie {
 	private Model model;
 	private OntModel ontologie;
 	List<List<String>> concepts;
+	List<List<String>> conceptChildren;
 	List<List<String>> relations;
 	List<List<String>> proprietes;
 	List<List<String>> individuals;
@@ -185,10 +189,28 @@ public class Ontologie {
 					} else
 						list.add("");
 					list.add(classe.getURI());
+
 					concepts.add(list);
 				}
 			}
 		}
+	}
+
+	public List<List<String>> getChildList(String classeURI) {
+
+		conceptChildren = new ArrayList<List<String>>();
+		
+
+		OntClass thing = ontologie.getOntClass(classeURI);
+		for (Iterator<OntClass> i = thing.listSubClasses(true); i.hasNext();) {
+			List<String> listChild = new ArrayList<String>();
+			OntClass classeChild = i.next();
+			listChild.add(classeChild.getLocalName());
+			listChild.add(classeChild.getURI());
+			conceptChildren.add(listChild);
+		}
+		
+		return conceptChildren;
 	}
 
 	public String getURI() {

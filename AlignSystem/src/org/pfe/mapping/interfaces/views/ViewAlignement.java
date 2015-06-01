@@ -2,8 +2,12 @@ package org.pfe.mapping.interfaces.views;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.print.DocFlavor.STRING;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IViewPart;
@@ -32,6 +36,8 @@ import org.pfe.mapping.alignement.Alignement;
 import org.pfe.mapping.alignement.semantics.SemanticSimilaritySentences;
 import org.pfe.mapping.alignement.semantics.SemanticSimilarityWords;
 import org.pfe.mapping.interfaces.Acceuil;
+import org.pfe.mapping.interfaces.views.tables.ViewAlignementResultOnglet;
+import org.pfe.mapping.interfaces.views.tables.ViewOntoPropertiesOnglet;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.layout.FormLayout;
@@ -39,6 +45,7 @@ import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Combo;
 
 public class ViewAlignement extends ViewPart {
 
@@ -47,7 +54,7 @@ public class ViewAlignement extends ViewPart {
 
 	public static final String ID = "org.pfe.mapping.interafces.views.ViewAlignement"; //$NON-NLS-1$
 	public CheckboxTableViewer ctv1;
-	public CheckboxTableViewer tv1;
+	// public CheckboxTableViewer tv1;
 	public String name = "";
 	public Text text_1;
 	public Text text_2;
@@ -117,10 +124,10 @@ public class ViewAlignement extends ViewPart {
 		text_3.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, true, 1,
 				1));
 
-		tv1 = CheckboxTableViewer.newCheckList(grp_operaions, SWT.BORDER);
-		tv1.getTable().setLayoutData(new GridData(GridData.FILL_BOTH));
-		tv1.setContentProvider(new BackupFilesContentProvider());
-		tv1.setLabelProvider(new BackupFilesLabelProvider());
+		// tv1 = CheckboxTableViewer.newCheckList(grp_operaions, SWT.BORDER);
+		// tv1.getTable().setLayoutData(new GridData(GridData.FILL_BOTH));
+		// tv1.setContentProvider(new BackupFilesContentProvider());
+		// tv1.setLabelProvider(new BackupFilesLabelProvider());
 
 		Composite composite_22 = new Composite(grp_operaions, SWT.BORDER);
 		composite_22
@@ -158,28 +165,34 @@ public class ViewAlignement extends ViewPart {
 
 		Composite composite_31 = new Composite(bar, SWT.NONE);
 		GridLayout gl_composite_31 = new GridLayout();
+		gl_composite_31.numColumns = 2;
 		gl_composite_31.marginLeft = gl_composite_31.marginTop = gl_composite_31.marginRight = gl_composite_31.marginBottom = 10;
 		gl_composite_31.verticalSpacing = 10;
 		composite_31.setLayout(gl_composite_31);
 		Button button_0 = new Button(composite_31, SWT.RADIO);
-		button_0.setSelection(true);
 		button_0.setText(/* "Hirst and St-Onge" */"HirstStOnge");
 		button_0.setToolTipText("Cette mesure prend en considération toutes les relations dans WordNet. Les liens sont\n"
 				+ "classés comme haut (eg. partie-de), bas (eg. sous-classe), horizontal (eg. antonyme).\n"
 				+ "La similarité est calculée entre mots par le poids du chemin le plus court qui mène d’un \n"
 				+ "terme à un autre. Il est calculé en fonctions de ces classifications qui indiquent les\n"
 				+ "changements de direction");
-		Button button_01 = new Button(composite_31, SWT.RADIO);
-		button_01.setText(/* "Leacock-Chodorow" */"LeacockChodorow");
-		button_01
-				.setToolTipText("L’approche par les liens assimile la distance entre deux termes au nombre de liens\n"
-						+ "qui les séparent sur le plus court chemin dans le réseau");
 		Button button_02 = new Button(composite_31, SWT.RADIO);
 		button_02.setText("Lesk");
 		button_02
 				.setToolTipText("considère la similarité entre deux sens comme le nombre de mots en commun dans\n"
 						+ "leurs définitions.");
+		Button button_01 = new Button(composite_31, SWT.RADIO);
+		button_01.setText(/* "Leacock-Chodorow" */"LeacockChodorow");
+		button_01
+				.setToolTipText("L’approche par les liens assimile la distance entre deux termes au nombre de liens\n"
+						+ "qui les séparent sur le plus court chemin dans le réseau");
+		Button button_06 = new Button(composite_31, SWT.RADIO);
+		button_06.setText("Lin");
+		button_06
+				.setToolTipText("Lin propose également une mesure de similarité très proche, qui revient essentiellement\n"
+						+ "à une reformulation sous forme de rapport de la formule de Jiang and Conrath");
 		Button button_03 = new Button(composite_31, SWT.RADIO);
+		button_03.setSelection(true);
 		button_03.setText("WuPalmer");
 		button_03
 				.setToolTipText("la similarité est définie par rapport à la distance qui sépare deux concepts dans\n"
@@ -195,11 +208,6 @@ public class ViewAlignement extends ViewPart {
 				.setToolTipText("Jiang Conrath pallie aux limites de la mesure de Resnik en combinant le contenu\n"
 						+ "informationnel du plus petit généralisant à ceux des concepts.\n"
 						+ "Elle prend en considération aussi le nombre d’arcs");
-		Button button_06 = new Button(composite_31, SWT.RADIO);
-		button_06.setText("Lin");
-		button_06
-				.setToolTipText("Lin propose également une mesure de similarité très proche, qui revient essentiellement\n"
-						+ "à une reformulation sous forme de rapport de la formule de Jiang and Conrath");
 		Button button_07 = new Button(composite_31, SWT.RADIO);
 		button_07.setText("Path");
 		button_07.setToolTipText("Path");
@@ -218,10 +226,10 @@ public class ViewAlignement extends ViewPart {
 		Button button_08 = new Button(composite_32, SWT.RADIO);
 		button_08.setSelection(true);
 		button_08.setText("FastMethod");
-		Button button_09 = new Button(composite_32, SWT.RADIO);
-		button_09.setText("calculateRBFSimilarity");
-		Button button_10 = new Button(composite_32, SWT.RADIO);
-		button_10.setText("SWT.RADIO");
+		Button btnCalculateRbfSimilarity = new Button(composite_32, SWT.RADIO);
+		btnCalculateRbfSimilarity.setText("Calculate RBF Similarity");
+		Button btnNeroneNetwork = new Button(composite_32, SWT.RADIO);
+		btnNeroneNetwork.setText("Nerone network");
 		ExpandItem item_sentance = new ExpandItem(bar, SWT.NONE, 1);
 		item_sentance.setText("Distance sémantique - phrase");
 		item_sentance.setHeight(composite_32.computeSize(SWT.DEFAULT,
@@ -231,44 +239,81 @@ public class ViewAlignement extends ViewPart {
 
 		item_word.setExpanded(true);
 		item_sentance.setExpanded(true);
+		
+		ExpandItem item_Ponderation = new ExpandItem(bar, SWT.NONE);
+		item_Ponderation.setExpanded(true);
+		item_Ponderation.setText("Pond\u00E9ration");
+		
+		Composite composite = new Composite(bar, SWT.NONE);
+		item_Ponderation.setControl(composite);
+		item_Ponderation.setHeight(item_Ponderation.getControl().computeSize(SWT.DEFAULT, SWT.DEFAULT).y);
+		composite.setLayout(new GridLayout(2, false));
+		
+		Label lblNewLabel = new Label(composite, SWT.NONE);
+		lblNewLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblNewLabel.setText("Linguistique");
+		
+		Combo combo_ling = new Combo(composite, SWT.NONE);
+		combo_ling.setItems(new String[] {"0", "0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9", "1"});
+		combo_ling.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		combo_ling.select(5);
+		
+		Label lblNewLabel_4 = new Label(composite, SWT.NONE);
+		lblNewLabel_4.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblNewLabel_4.setText("Hi\u00E9rarchique");
+		
+		Combo combo_hier = new Combo(composite, SWT.NONE);
+		combo_hier.setItems(new String[] {"0", "0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9", "1"});
+		combo_hier.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		combo_hier.select(5);
 
 		btn_align.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent event) {
-				String O1 = "/" + Acceuil.path + "/OntoBe/Fam.owl";
-				String O2 = "/" + Acceuil.path + "/OntoBe/Fam.owl";
-				String methodWord = "";
-				String methodSentence = "";
+			String O1 = "/" + Acceuil.path + "/BachMark/Labo1.owl";
+			String O2 = "/" + Acceuil.path + "/BachMark/Labo2.owl";
+			String methodWord = null;
+			String methodSentence = null;
 
-				if (button_0.getText() == SemanticSimilarityWords.HirstStOnge)
+			List<List<String>> list = new ArrayList<List<String>>();
+
+			public void widgetSelected(SelectionEvent event) {
+
+				if (button_0.getSelection()
+						&& (button_0.getText() == SemanticSimilarityWords.HirstStOnge))
 					methodWord = SemanticSimilarityWords.HirstStOnge;
 
-				else if (btn_selectAll.getText() == SemanticSimilarityWords.LeacockChodorow)
+				else if (btn_selectAll.getSelection()
+						&& (button_01.getText() == SemanticSimilarityWords.LeacockChodorow))
 					methodWord = SemanticSimilarityWords.LeacockChodorow;
 
-				else if (button_02.getText() == SemanticSimilarityWords.Lesk)
+				else if (button_02.getSelection())
 					methodWord = SemanticSimilarityWords.Lesk;
 
-				else if (button_03.getText() == SemanticSimilarityWords.WuPalmer)
+				else if (button_03.getSelection()
+						&& (button_03.getText() == SemanticSimilarityWords.WuPalmer))
 					methodWord = SemanticSimilarityWords.WuPalmer;
 
-				else if (button_04.getText() == SemanticSimilarityWords.Resnik)
+				else if (button_04.getSelection()
+						&& (button_04.getText() == SemanticSimilarityWords.Resnik))
 					methodWord = SemanticSimilarityWords.Resnik;
 
-				else if (button_05.getText() == SemanticSimilarityWords.JiangConrath)
+				else if (button_05.getSelection()
+						&& (button_05.getText() == SemanticSimilarityWords.JiangConrath))
 					methodWord = SemanticSimilarityWords.JiangConrath;
 
-				else if (button_06.getText() == SemanticSimilarityWords.Lin)
+				else if (button_06.getSelection()
+						&& (button_06.getText() == SemanticSimilarityWords.Lin))
 					methodWord = SemanticSimilarityWords.Lin;
 
-				else if (button_07.getText() == SemanticSimilarityWords.Path)
+				else if (button_07.getSelection()
+						&& (button_07.getText() == SemanticSimilarityWords.Path))
 					methodWord = SemanticSimilarityWords.Path;
 
-				// ///
-
-				if (button_08.getText() == SemanticSimilaritySentences.FastMethod)
+				if (button_08.getSelection()
+						&& (button_08.getText() == SemanticSimilaritySentences.FastMethod))
 					methodSentence = SemanticSimilaritySentences.FastMethod;
 
-				else if (button_08.getText() == SemanticSimilaritySentences.calculateRBFSimilarity)
+				else if (btnCalculateRbfSimilarity.getSelection()
+						&& (btnCalculateRbfSimilarity.getText() == SemanticSimilaritySentences.calculateRBFSimilarity))
 					methodSentence = SemanticSimilaritySentences.calculateRBFSimilarity;
 
 				IWorkbenchPage page = PlatformUI.getWorkbench()
@@ -282,17 +327,18 @@ public class ViewAlignement extends ViewPart {
 					e.printStackTrace();
 				}
 
+				list.clear();
+				ViewAlignementResultOnglet ropertiesOnglet = new ViewAlignementResultOnglet(
+						(ViewAlignementResult) view, list);
+				ropertiesOnglet.updateOngletResultatInterface();
+				// /
+				
 				
 				new Alignement(O1, O2, methodWord, methodSentence,
-						(ViewAlignement) viewLocal, getSite().getShell().getDisplay(), progressBar).start();
-				
-				/*while (!getSite().getShell().isDisposed()) {
-					if (!getSite().getShell().getDisplay().readAndDispatch()) {
-						getSite().getShell().getDisplay().sleep();
-					}
-				}*/
+						(ViewAlignement) viewLocal, getSite().getShell()
+								.getDisplay(), progressBar, list,combo_ling.getText(),combo_hier.getText(),  
+						ropertiesOnglet).start();
 
-				// ((ViewAlignementResult) view).........;
 				view.setFocus();
 			}
 		});

@@ -1,9 +1,13 @@
 package org.pfe.ontologie;
 
+import java.util.List;
+
 public class ConceptInformation {
 	private String concept;
 	private String iri;
 	private String label;
+	private List<ConceptInformation> Childern;
+	
 
 	private String conceptEquivalent;
 	private String iriEquivalent;

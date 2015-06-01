@@ -24,46 +24,43 @@ public class SemanticSimilarityWords {
 	public final static String JiangConrath = "JiangConrath";
 	public final static String Lin = "Lin";
 	public final static String Path = "Path";
-	
+
 	private ILexicalDatabase db = new NictWordNet();
 
 	private double run(String word1, String word2, String method) {
-		
+
 		RelatednessCalculator rcs1 = null;
-		
-		if (method.equals(HirstStOnge))
-			rcs1 =  new HirstStOnge(db);
-		
-		if (method.equals(LeacockChodorow))
-			rcs1 =  new LeacockChodorow(db);
-		
-		if (method.equals(Lesk))
-			rcs1 =  new Lesk(db);
-		
-		if (method.equals(WuPalmer))
-			rcs1 =  new WuPalmer(db);
-		
-		if (method.equals(Resnik))
-			rcs1 =  new Resnik(db);
-		
-		if (method.equals(JiangConrath))
-			rcs1 =  new JiangConrath(db);
-		
-		if (method.equals(Lin))
-			rcs1 =  new Lin(db);
-		
-		if (method.equals(Path))
-			rcs1 =  new Path(db);
-		
 		WS4JConfiguration.getInstance().setMFS(true);
 		double s = 0;
-			s = rcs1.calcRelatednessOfWords(word1, word2);
 
-			return s;
+		if (method.equals(HirstStOnge))
+			s = new HirstStOnge(db).calcRelatednessOfWords(word1, word2);
+
+		else if (method.equals(LeacockChodorow))
+			s = new LeacockChodorow(db).calcRelatednessOfWords(word1, word2);
+
+		/*else if (method.equals(Lesk))
+			s = new Lesk(db).calcRelatednessOfWords(word1, word2);*/
+
+		else if (method.equals(WuPalmer))
+			s = new WuPalmer(db).calcRelatednessOfWords(word1, word2);
+
+		else if (method.equals(Resnik))
+			s = new Resnik(db).calcRelatednessOfWords(word1, word2);
+
+		else if (method.equals(JiangConrath))
+			s = new JiangConrath(db).calcRelatednessOfWords(word1, word2);
+
+		else if (method.equals(Lin))
+			s = new Lin(db).calcRelatednessOfWords(word1, word2);
+
+		else if (method.equals(Path))
+			s = new Path(db).calcRelatednessOfWords(word1, word2);
+
+		return s;
 	}
-	
-	
-	public double getScoreWords(String concept1, String concept2, String method){		  
-		return run(concept1,concept2, method); 
+
+	public double getScoreWords(String concept1, String concept2, String method) {
+		return run(concept1, concept2, method);
 	}
 }
