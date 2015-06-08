@@ -15,21 +15,24 @@ public class SimiliratyConceptDataModel {
 	public List<SimiliratyConceptInformation> getData() {
 		List<SimiliratyConceptInformation> similarityconcepts = new ArrayList<SimiliratyConceptInformation>();
 
-		Iterator<List<String>> Itersimilarityconcept = list.iterator();
-		while (Itersimilarityconcept.hasNext()) {
-			Iterator<String> Iter = Itersimilarityconcept.next().iterator();
+		for(int i=list.size()-1;i>-1;i--){
+		//Iterator<List<String>> Itersimilarityconcept = list.iterator();
+		//while (Itersimilarityconcept.hasNext()) {
+			Iterator<String> Iter = list.get(i).iterator();//Itersimilarityconcept.next().iterator();
 			if (Iter.hasNext()) {
 				String c1 = Iter.next();
 				String c2 = Iter.next();
 				String sl = Iter.next();
 				String sh = Iter.next();
 				String ss = Iter.next();
+				String ismax = Iter.next();
 
 				SimiliratyConceptInformation ci = new SimiliratyConceptInformation(
-						c1, c2, sl, sh, ss);
+						c1, c2, sl, sh, ss, ismax);
 				similarityconcepts.add(ci);
 			}
 		}
+		
 		return similarityconcepts;
 	}
 }

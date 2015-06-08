@@ -54,15 +54,12 @@ public class ViewAlignement extends ViewPart {
 
 	public static final String ID = "org.pfe.mapping.interafces.views.ViewAlignement"; //$NON-NLS-1$
 	public CheckboxTableViewer ctv1;
-	// public CheckboxTableViewer tv1;
 	public String name = "";
 	public Text text_1;
 	public Text text_2;
 	public Text text_3;
 
 	public ProgressBar progressBar;
-
-	// private Table table;
 
 	@PostConstruct
 	public void createPartControl(Composite parent) {
@@ -239,32 +236,39 @@ public class ViewAlignement extends ViewPart {
 
 		item_word.setExpanded(true);
 		item_sentance.setExpanded(true);
-		
+
 		ExpandItem item_Ponderation = new ExpandItem(bar, SWT.NONE);
 		item_Ponderation.setExpanded(true);
 		item_Ponderation.setText("Pond\u00E9ration");
-		
+
 		Composite composite = new Composite(bar, SWT.NONE);
 		item_Ponderation.setControl(composite);
-		item_Ponderation.setHeight(item_Ponderation.getControl().computeSize(SWT.DEFAULT, SWT.DEFAULT).y);
+		item_Ponderation.setHeight(item_Ponderation.getControl().computeSize(
+				SWT.DEFAULT, SWT.DEFAULT).y);
 		composite.setLayout(new GridLayout(2, false));
-		
+
 		Label lblNewLabel = new Label(composite, SWT.NONE);
-		lblNewLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblNewLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+				false, 1, 1));
 		lblNewLabel.setText("Linguistique");
-		
+
 		Combo combo_ling = new Combo(composite, SWT.NONE);
-		combo_ling.setItems(new String[] {"0", "0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9", "1"});
-		combo_ling.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		combo_ling.setItems(new String[] { "0", "0.1", "0.2", "0.3", "0.4",
+				"0.5", "0.6", "0.7", "0.8", "0.9", "1" });
+		combo_ling.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 1, 1));
 		combo_ling.select(5);
-		
+
 		Label lblNewLabel_4 = new Label(composite, SWT.NONE);
-		lblNewLabel_4.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblNewLabel_4.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+				false, 1, 1));
 		lblNewLabel_4.setText("Hi\u00E9rarchique");
-		
+
 		Combo combo_hier = new Combo(composite, SWT.NONE);
-		combo_hier.setItems(new String[] {"0", "0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9", "1"});
-		combo_hier.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		combo_hier.setItems(new String[] { "0", "0.1", "0.2", "0.3", "0.4",
+				"0.5", "0.6", "0.7", "0.8", "0.9", "1" });
+		combo_hier.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 1, 1));
 		combo_hier.select(5);
 
 		btn_align.addSelectionListener(new SelectionAdapter() {
@@ -332,12 +336,14 @@ public class ViewAlignement extends ViewPart {
 						(ViewAlignementResult) view, list);
 				ropertiesOnglet.updateOngletResultatInterface();
 				// /
-				
-				
+
 				new Alignement(O1, O2, methodWord, methodSentence,
 						(ViewAlignement) viewLocal, getSite().getShell()
-								.getDisplay(), progressBar, list,combo_ling.getText(),combo_hier.getText(),  
+								.getDisplay(), progressBar, list, combo_ling
+								.getText(), combo_hier.getText(),
 						ropertiesOnglet).start();
+				
+				ropertiesOnglet.updateOngletResultatInterface();
 
 				view.setFocus();
 			}

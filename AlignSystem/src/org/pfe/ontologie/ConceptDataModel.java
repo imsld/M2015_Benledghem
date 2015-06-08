@@ -6,9 +6,15 @@ import java.util.List;
 
 public class ConceptDataModel {
 	List<List<String>> list;
+	private int size;
+
+	public int getSize() {
+		return size;
+	}
 
 	public ConceptDataModel(List<List<String>> list) {
 		this.list = list;
+		size = list.size();
 	}
 
 	public List<ConceptInformation> getData() {

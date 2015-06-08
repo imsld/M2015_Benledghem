@@ -1,0 +1,202 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY foaf "http://xmlns.com/foaf/0.1/" >
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY dc "http://purl.org/dc/elements/1.1/" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY ical "http://www.w3.org/2002/12/cal/ical#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="http://oaei.ontologymatching.org/tests/230/onto.rdf#"
+     xml:base="http://oaei.ontologymatching.org/tests/230/onto.rdf"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:foaf="http://xmlns.com/foaf/0.1/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:ical="http://www.w3.org/2002/12/cal/ical#">
+    <owl:Ontology rdf:about="http://oaei.ontologymatching.org/tests/230/onto.rdf">
+        <rdfs:label>Bibliographic references</rdfs:label>
+        <rdfs:comment>Possible ontology to describe bibTeX entries.</rdfs:comment>
+        <owl:versionInfo>$Id: onto-cflat.rdf,v 1.15 2011/05/31 15:37:28 euzenat Exp $</owl:versionInfo>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://oaei.ontologymatching.org/tests/230/onto.rdf#Article -->
+
+    <owl:Class rdf:about="http://oaei.ontologymatching.org/tests/230/onto.rdf#Article"/>
+    
+
+
+    <!-- http://oaei.ontologymatching.org/tests/230/onto.rdf#College -->
+
+    <owl:Class rdf:about="http://oaei.ontologymatching.org/tests/230/onto.rdf#College">
+        <rdfs:subClassOf rdf:resource="&foaf;Organization"/>
+    </owl:Class>
+    
+
+
+    <!-- http://oaei.ontologymatching.org/tests/230/onto.rdf#Headmaster -->
+
+    <owl:Class rdf:about="http://oaei.ontologymatching.org/tests/230/onto.rdf#Headmaster">
+        <rdfs:subClassOf rdf:resource="&foaf;Person"/>
+    </owl:Class>
+    
+
+
+    <!-- http://oaei.ontologymatching.org/tests/230/onto.rdf#Instructor -->
+
+    <owl:Class rdf:about="http://oaei.ontologymatching.org/tests/230/onto.rdf#Instructor">
+        <rdfs:subClassOf rdf:resource="&foaf;Person"/>
+    </owl:Class>
+    
+
+
+    <!-- http://oaei.ontologymatching.org/tests/230/onto.rdf#Meeting -->
+
+    <owl:Class rdf:about="http://oaei.ontologymatching.org/tests/230/onto.rdf#Meeting">
+        <rdfs:subClassOf rdf:resource="http://oaei.ontologymatching.org/tests/230/onto.rdf#Scientific_Event"/>
+    </owl:Class>
+    
+
+
+    <!-- http://oaei.ontologymatching.org/tests/230/onto.rdf#Report -->
+
+    <owl:Class rdf:about="http://oaei.ontologymatching.org/tests/230/onto.rdf#Report">
+        <rdfs:subClassOf rdf:resource="http://oaei.ontologymatching.org/tests/230/onto.rdf#Article"/>
+    </owl:Class>
+    
+
+
+    <!-- http://oaei.ontologymatching.org/tests/230/onto.rdf#Scientific_Event -->
+
+    <owl:Class rdf:about="http://oaei.ontologymatching.org/tests/230/onto.rdf#Scientific_Event"/>
+    
+
+
+    <!-- http://oaei.ontologymatching.org/tests/230/onto.rdf#Searcher -->
+
+    <owl:Class rdf:about="http://oaei.ontologymatching.org/tests/230/onto.rdf#Searcher">
+        <rdfs:subClassOf rdf:resource="&foaf;Person"/>
+    </owl:Class>
+    
+
+
+    <!-- http://oaei.ontologymatching.org/tests/230/onto.rdf#Seminar -->
+
+    <owl:Class rdf:about="http://oaei.ontologymatching.org/tests/230/onto.rdf#Seminar">
+        <rdfs:subClassOf rdf:resource="http://oaei.ontologymatching.org/tests/230/onto.rdf#Scientific_Event"/>
+    </owl:Class>
+    
+
+
+    <!-- http://oaei.ontologymatching.org/tests/230/onto.rdf#Student -->
+
+    <owl:Class rdf:about="http://oaei.ontologymatching.org/tests/230/onto.rdf#Student">
+        <rdfs:subClassOf rdf:resource="&foaf;Person"/>
+    </owl:Class>
+    
+
+
+    <!-- http://oaei.ontologymatching.org/tests/230/onto.rdf#Teacher -->
+
+    <owl:Class rdf:about="http://oaei.ontologymatching.org/tests/230/onto.rdf#Teacher">
+        <rdfs:subClassOf rdf:resource="&foaf;Person"/>
+    </owl:Class>
+    
+
+
+    <!-- http://oaei.ontologymatching.org/tests/230/onto.rdf#Writer -->
+
+    <owl:Class rdf:about="http://oaei.ontologymatching.org/tests/230/onto.rdf#Writer">
+        <rdfs:subClassOf rdf:resource="&foaf;Person"/>
+    </owl:Class>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/Organization -->
+
+    <owl:Class rdf:about="&foaf;Organization"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/Person -->
+
+    <owl:Class rdf:about="&foaf;Person"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotations
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description rdf:about="http://oaei.ontologymatching.org/tests/230/onto.rdf#a439508789">
+        <rdfs:label>Measuring Similarity between Ontologies</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://oaei.ontologymatching.org/tests/230/onto.rdf#a11065952">
+        <rdfs:label>Ontology Mapping - An Integrated Approach</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://oaei.ontologymatching.org/tests/230/onto.rdf#a71568377">
+        <rdfs:label>Database integration: the key to data interoperability</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://oaei.ontologymatching.org/tests/230/onto.rdf#a846015923">
+        <rdfs:label>A Framework for Modeling and Evaluating Automatic Semantic Reconciliation</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://oaei.ontologymatching.org/tests/230/onto.rdf#a140583454">
+        <rdfs:label>{QOM} - Quick Ontology Mapping</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://oaei.ontologymatching.org/tests/230/onto.rdf#a80299267">
+        <rdfs:label>Start making sense: The Chatty Web approach for global semantic agreements</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://oaei.ontologymatching.org/tests/230/onto.rdf#a492378321">
+        <rdfs:label>{P-Grid: A Self-organizing Structured P2P System}</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://oaei.ontologymatching.org/tests/230/onto.rdf#a72192307">
+        <rdfs:label>Proc. Of the 13th Int. Conference on Knowledge Engineering and Management (EKAW-2002)</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://oaei.ontologymatching.org/tests/230/onto.rdf#a456080390">
+        <rdfs:label>On dynamically generated ontology translators in agent communication</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://oaei.ontologymatching.org/tests/230/onto.rdf#a060097576">
+        <rdfs:label>Proceedings of the SemPGrid 04 Workshop</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://oaei.ontologymatching.org/tests/230/onto.rdf#a64263824">
+        <rdfs:label>Bibster - A Semantics-Based Bibliographic Peer-to-Peer System</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://oaei.ontologymatching.org/tests/230/onto.rdf#a108048723">
+        <rdfs:label>Object-Oriented Data Modeling</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://oaei.ontologymatching.org/tests/230/onto.rdf#a32071928">
+        <rdfs:label>Proceedings of the First European Semantic Web Symposium</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://oaei.ontologymatching.org/tests/230/onto.rdf#a475526642">
+        <rdfs:label>Binary Codes capable of correcting deletions, insertions, and reversals</rdfs:label>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net -->
+

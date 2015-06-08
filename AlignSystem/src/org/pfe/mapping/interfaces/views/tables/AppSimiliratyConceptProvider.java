@@ -5,6 +5,7 @@ import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 import org.pfe.ontologie.ConceptDataModel;
 import org.pfe.ontologie.SimiliratyConceptDataModel;
+import org.pfe.ontologie.SimiliratyConceptInformation;
 
 public class AppSimiliratyConceptProvider implements IStructuredContentProvider {
 	/*

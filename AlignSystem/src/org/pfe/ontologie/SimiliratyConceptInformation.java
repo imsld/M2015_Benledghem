@@ -6,17 +6,21 @@ public class SimiliratyConceptInformation {
 	private String socre_linguistic;
 	private String socre_hierarchic;
 	private String socre_semantic;
+	private Boolean isMaxScore;
 
 	public SimiliratyConceptInformation(String concept_o1, String concept_o2,
 			String socre_linguistic, String socre_hierarchic,
-			String socre_semantic) {
+			String socre_semantic, String isMaxScore) {
 		super();
 		this.concept_o1 = concept_o1;
 		this.concept_o2 = concept_o2;
 		this.socre_linguistic = socre_linguistic;
 		this.socre_hierarchic = socre_hierarchic;
 		this.socre_semantic = socre_semantic;
+		this.isMaxScore = (Boolean.parseBoolean(isMaxScore));
 	}
+
+	
 
 	public String getConcept_o1() {
 		return concept_o1;
@@ -57,4 +61,13 @@ public class SimiliratyConceptInformation {
 	public void setSocre_semantic(String socre_semantic) {
 		this.socre_semantic = socre_semantic;
 	}
+	
+	public Boolean IsMaxScore() {
+		return isMaxScore;
+	}
+
+	public void setMaxScore(Boolean isMaxScore) {
+		this.isMaxScore = isMaxScore;
+	}
 }
+

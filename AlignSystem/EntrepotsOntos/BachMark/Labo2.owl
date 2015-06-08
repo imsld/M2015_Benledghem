@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#"
+     xml:base="http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Article -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Article">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Paper"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Author -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Author">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#People"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Book -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Book">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Paper"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Collection -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Collection">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Paper"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Conference -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Conference">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Event"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Director -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Director">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#People"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Event -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Event"/>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Organisation -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Organisation"/>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Paper -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Paper"/>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#People -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#People"/>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Proceeding -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Proceeding">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Paper"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Scholar -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Scholar">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#People"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#School -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#School">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Organisation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Searcher -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Searcher">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#People"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Teacher -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Teacher">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#People"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#University -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#University">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Organisation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Workshop -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Workshop">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ismail/ontologies/2015/4/31/untitled-ontology-103#Event"/>
+    </owl:Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net -->
+

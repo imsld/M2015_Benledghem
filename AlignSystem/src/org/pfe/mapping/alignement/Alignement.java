@@ -38,8 +38,7 @@ public class Alignement extends Thread {
 	private List<List<String>> list;
 	ViewAlignementResultOnglet ropertiesOnglet;
 	double pond_ling, pond_hier;
-
-	double s;
+	double score_Sem = 0;
 
 	public Alignement(String o1_path, String o2_path, String methodWord,
 			String methodSentence, ViewAlignement viewLocal, Display display,
@@ -70,29 +69,42 @@ public class Alignement extends Thread {
 	public void run() {
 		cdm1 = new ConceptDataModel(onto_1.getConceptDataList());
 		cdm2 = new ConceptDataModel(onto_2.getConceptDataList());
+		
 		String cpt1, cpt2;
-		double score_ling, score_hier = 0, score_Sem = 0;
+		double score_ling, score_hier = 0;
+		double maxScore;
+		int posMaxScore;
+		int posDebut = 0;
 
 		for (ConceptInformation concept_1 : cdm1.getData()) {
+			maxScore = 0;
+			posMaxScore = -1;
+			
 			cpt1 = concept_1.getConcept();
+			//
+			if (cpt1.equals("Meeting"))
+			System.out.println("");
+				//
 			List<List<String>> Concept1_childList = onto_1
 					.getChildList(concept_1.getIRI());
 
+			
 			for (ConceptInformation concept_2 : cdm2.getData()) {
 				cpt2 = concept_2.getConcept();
 				List<List<String>> Concept2_childList = onto_2
 						.getChildList(concept_2.getIRI());
 
 				score_ling = getLinguisticScore(cpt1, cpt2);
-				score_hier = (score_ling + getHierachicScore(
-						Concept1_childList, Concept2_childList)) / 2;
-				score_Sem = ((score_ling*pond_ling) + (score_hier*pond_hier));
+				score_hier = getHierachicScore(Concept1_childList,
+						Concept2_childList);
+				score_Sem = ((score_ling * pond_ling) + (score_hier * pond_hier));
 
-				s = score_ling;
 				list.add(Arrays.asList(concept_1.getConcept(),
 						concept_2.getConcept(), Double.toString(score_ling),
-						Double.toString(score_hier), Double.toString(score_Sem)));
+						Double.toString(score_hier),
+						Double.toString(score_Sem), Boolean.toString(false)));
 
+				
 				display.syncExec(new Runnable() {
 					public void run() {
 						if (progressBar.isDisposed())
@@ -100,15 +112,52 @@ public class Alignement extends Thread {
 						progressBar.setSelection(progressBar.getSelection() + 1);
 						viewLocal.text_1.setText(concept_1.getConcept());
 						viewLocal.text_2.setText(concept_2.getConcept());
-						viewLocal.text_3.setText(Double.toString(s));
+						viewLocal.text_3.setText(Double.toString(score_Sem));
 						ropertiesOnglet.updateOngletResultatInterface();
 
 					}
 				});
 			}
-
+			
+			orderByScore(posDebut, posDebut+cdm2.getSize()-1);
+			posDebut = posDebut+cdm2.getSize();
+			
 		}
+		
+		display.syncExec(new Runnable() {
+			public void run() {
+				ropertiesOnglet.updateOngletResultatInterface();
+			}
+		});
+	}
 
+	private void orderByScore(int posDebut, int posFin) {
+		List<String> chaine1 = null;
+		List<String> chaine2 = null;
+		int posMax = 0;
+		double score1, score2;
+		for (int i = posDebut; i <= posFin -1; i++) {
+			posMax = i;
+			chaine1 = list.get(i);
+			score1 = Double.parseDouble(chaine1.get(4));
+			for (int j = i + 1; j <= posFin; j++) {
+				chaine2 = list.get(j);
+				score2 = Double.parseDouble(chaine2.get(4));
+				if (score2 < score1){
+					posMax = j;
+					score1 = score2;
+				}
+			}
+			if (posMax != i){
+				chaine2 = list.get(posMax);				
+				list.set(i, chaine2);
+				list.set(posMax, chaine1);
+			}
+			
+		}
+		chaine1 = list.get(posFin);
+		chaine1.set(5, Boolean.toString(true));
+		list.set(posFin, chaine1);
 	}
 
 	private double getHierachicScore(List<List<String>> concept1_childList,
@@ -138,13 +187,10 @@ public class Alignement extends Thread {
 		if (cpt1.equals(cpt2))
 			return 1;
 		else {
-			if (cpt1.equals("Scientific_Event"))
-				System.out.println(cpt1 + " " + cpt2);
 			cpt1 = cpt1.replace("_", " ");
 			cpt2 = cpt2.replace("_", " ");
 
 			if (cpt1.contains(" ") || cpt2.contains(" ")) {
-				System.out.println(cpt1 + " " + cpt2);
 				return SSS.getScoresentences(cpt1, cpt2, methodSentence);
 			} else
 				return SSW.getScoreWords(cpt1, cpt2, methodWord);
