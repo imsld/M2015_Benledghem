@@ -69,26 +69,17 @@ public class Alignement extends Thread {
 	public void run() {
 		cdm1 = new ConceptDataModel(onto_1.getConceptDataList());
 		cdm2 = new ConceptDataModel(onto_2.getConceptDataList());
-		
+
 		String cpt1, cpt2;
 		double score_ling, score_hier = 0;
-		double maxScore;
-		int posMaxScore;
 		int posDebut = 0;
 
 		for (ConceptInformation concept_1 : cdm1.getData()) {
-			maxScore = 0;
-			posMaxScore = -1;
-			
+
 			cpt1 = concept_1.getConcept();
-			//
-			if (cpt1.equals("Meeting"))
-			System.out.println("");
-				//
 			List<List<String>> Concept1_childList = onto_1
 					.getChildList(concept_1.getIRI());
 
-			
 			for (ConceptInformation concept_2 : cdm2.getData()) {
 				cpt2 = concept_2.getConcept();
 				List<List<String>> Concept2_childList = onto_2
@@ -102,9 +93,9 @@ public class Alignement extends Thread {
 				list.add(Arrays.asList(concept_1.getConcept(),
 						concept_2.getConcept(), Double.toString(score_ling),
 						Double.toString(score_hier),
-						Double.toString(score_Sem), Boolean.toString(false)));
+						Double.toString(score_Sem), Boolean.toString(false),
+						Boolean.toString(false), Boolean.toString(false)));
 
-				
 				display.syncExec(new Runnable() {
 					public void run() {
 						if (progressBar.isDisposed())
@@ -113,50 +104,104 @@ public class Alignement extends Thread {
 						viewLocal.text_1.setText(concept_1.getConcept());
 						viewLocal.text_2.setText(concept_2.getConcept());
 						viewLocal.text_3.setText(Double.toString(score_Sem));
-						ropertiesOnglet.updateOngletResultatInterface();
-
+						// ropertiesOnglet.updateOngletResultatInterface();
 					}
+
 				});
 			}
-			
-			orderByScore(posDebut, posDebut+cdm2.getSize()-1);
-			posDebut = posDebut+cdm2.getSize();
-			
+
+			orderByMaxSemantiqueScore(posDebut, posDebut + cdm2.getSize() - 1);
+			SetMaxLinguistiqueScore(posDebut, posDebut + cdm2.getSize() - 1);
+			SetMaxHierarchiqueScore(posDebut, posDebut + cdm2.getSize() - 1);
+			posDebut = posDebut + cdm2.getSize();
+			display.syncExec(new Runnable() {
+				public void run() {
+					ropertiesOnglet.updateOngletResultatInterface();
+				}
+			});
+
 		}
-		
-		display.syncExec(new Runnable() {
-			public void run() {
-				ropertiesOnglet.updateOngletResultatInterface();
-			}
-		});
+
+		/*
+		 * display.syncExec(new Runnable() { public void run() {
+		 * ropertiesOnglet.updateOngletResultatInterface(); } });
+		 */
 	}
 
-	private void orderByScore(int posDebut, int posFin) {
+	private void SetMaxLinguistiqueScore(int posDebut, int posFin) {
 		List<String> chaine1 = null;
 		List<String> chaine2 = null;
 		int posMax = 0;
 		double score1, score2;
-		for (int i = posDebut; i <= posFin -1; i++) {
+			int i = posDebut; 
+			posMax = i;
+			chaine1 = list.get(i);
+			score1 = Double.parseDouble(chaine1.get(2));
+			for (int j = i + 1; j <= posFin; j++) {
+				chaine2 = list.get(j);
+				score2 = Double.parseDouble(chaine2.get(2));
+				if (score2 > score1) {
+					posMax = j;
+					score1 = score2;
+				}
+			}
+			
+				chaine2 = list.get(posMax);
+				chaine2.set(5, Boolean.toString(true));
+				list.set(posMax, chaine2);
+	}
+
+	private void SetMaxHierarchiqueScore(int posDebut, int posFin) {
+		List<String> chaine1 = null;
+		List<String> chaine2 = null;
+		int posMax = 0;
+		double score1, score2=0;
+			int i = posDebut;
+			posMax = i;
+			chaine1 = list.get(i);
+			score1 = Double.parseDouble(chaine1.get(3));
+			for (int j = i + 1; j <= posFin; j++) {
+				chaine2 = list.get(j);
+				score2 = Double.parseDouble(chaine2.get(3));
+				if (score2 > score1) {
+					posMax = j;
+					score1 = score2;
+				}
+			}
+			if (score1!=0){
+				chaine2 = list.get(posMax);
+				chaine2.set(6, Boolean.toString(true));
+				list.set(posMax, chaine2);
+			}
+	}
+
+	
+	private void orderByMaxSemantiqueScore(int posDebut, int posFin) {
+		List<String> chaine1 = null;
+		List<String> chaine2 = null;
+		int posMax = 0;
+		double score1, score2;
+		for (int i = posDebut; i <= posFin - 1; i++) {
 			posMax = i;
 			chaine1 = list.get(i);
 			score1 = Double.parseDouble(chaine1.get(4));
 			for (int j = i + 1; j <= posFin; j++) {
 				chaine2 = list.get(j);
 				score2 = Double.parseDouble(chaine2.get(4));
-				if (score2 < score1){
+				if (score2 < score1) {
 					posMax = j;
 					score1 = score2;
 				}
 			}
-			if (posMax != i){
-				chaine2 = list.get(posMax);				
+			if (posMax != i) {
+				chaine2 = list.get(posMax);
 				list.set(i, chaine2);
 				list.set(posMax, chaine1);
 			}
-			
+
 		}
 		chaine1 = list.get(posFin);
-		chaine1.set(5, Boolean.toString(true));
+		chaine1.set(7, Boolean.toString(true));
 		list.set(posFin, chaine1);
 	}
 

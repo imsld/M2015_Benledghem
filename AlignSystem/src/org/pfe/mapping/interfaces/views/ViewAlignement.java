@@ -58,6 +58,10 @@ public class ViewAlignement extends ViewPart {
 	public Text text_1;
 	public Text text_2;
 	public Text text_3;
+	public Button btnRadioLig;
+	public Button btnRadioHier;
+	public Button btnRadioSem;
+	public ViewAlignementResultOnglet ropertiesOnglet;
 
 	public ProgressBar progressBar;
 
@@ -131,6 +135,35 @@ public class ViewAlignement extends ViewPart {
 				.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_FILL));
 		composite_22.setLayout(new FillLayout(SWT.HORIZONTAL));
 		progressBar = new ProgressBar(composite_22, SWT.FILL);
+
+		Group grpVisualisation = new Group(grp_operaions, SWT.NONE);
+		grpVisualisation.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
+				false, false, 1, 1));
+		grpVisualisation.setText("Visualisation");
+		GridLayout gl_grpVisualisation = new GridLayout(2, false);
+		gl_grpVisualisation.verticalSpacing = 10;
+		gl_grpVisualisation.marginTop = 10;
+		gl_grpVisualisation.marginRight = 10;
+		gl_grpVisualisation.marginLeft = 10;
+		gl_grpVisualisation.marginBottom = 10;
+		grpVisualisation.setLayout(gl_grpVisualisation);
+
+		btnRadioLig = new Button(grpVisualisation, SWT.RADIO);
+		btnRadioLig.setText("Liguistique");
+		new Label(grpVisualisation, SWT.NONE);
+
+		btnRadioHier = new Button(grpVisualisation, SWT.RADIO);
+		btnRadioHier.setText("Hi\u00E9rarchique");
+		new Label(grpVisualisation, SWT.NONE);
+
+		btnRadioSem = new Button(grpVisualisation, SWT.RADIO);
+		btnRadioSem.setSelection(true);
+		btnRadioSem.setText("S\u00E9mantique");
+		new Label(grpVisualisation, SWT.NONE);
+		new Label(grpVisualisation, SWT.NONE);
+		
+		Button btnVisualisation = new Button(grpVisualisation, SWT.NONE);
+		btnVisualisation.setText("Visualisation");
 
 		Group grp_parameters = new Group(composite_3, SWT.NONE);
 		grp_parameters.setText("Configuration");
@@ -210,7 +243,7 @@ public class ViewAlignement extends ViewPart {
 		button_07.setToolTipText("Path");
 
 		ExpandItem item_word = new ExpandItem(bar, SWT.NONE, 0);
-		item_word.setText("Distance sémantique - mot");
+		item_word.setText("Distance s\u00E9mantique - Concept simple");
 		item_word
 				.setHeight(composite_31.computeSize(SWT.DEFAULT, SWT.DEFAULT).y);
 		item_word.setControl(composite_31);
@@ -228,7 +261,8 @@ public class ViewAlignement extends ViewPart {
 		Button btnNeroneNetwork = new Button(composite_32, SWT.RADIO);
 		btnNeroneNetwork.setText("Nerone network");
 		ExpandItem item_sentance = new ExpandItem(bar, SWT.NONE, 1);
-		item_sentance.setText("Distance sémantique - phrase");
+		item_sentance
+				.setText("Distance s\u00E9mantique - Concept compops\u00E9");
 		item_sentance.setHeight(composite_32.computeSize(SWT.DEFAULT,
 				SWT.DEFAULT).y);
 		item_sentance.setControl(composite_32);
@@ -271,9 +305,14 @@ public class ViewAlignement extends ViewPart {
 				false, 1, 1));
 		combo_hier.select(5);
 
+		btnVisualisation.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent event) {
+				ropertiesOnglet.updateOngletAlignementInterface();
+			}
+		});
+		
 		btn_align.addSelectionListener(new SelectionAdapter() {
-			String O1 = "/" + Acceuil.path + "/BachMark/Labo1.owl";
-			String O2 = "/" + Acceuil.path + "/BachMark/Labo2.owl";
+
 			String methodWord = null;
 			String methodSentence = null;
 
@@ -332,17 +371,29 @@ public class ViewAlignement extends ViewPart {
 				}
 
 				list.clear();
-				ViewAlignementResultOnglet ropertiesOnglet = new ViewAlignementResultOnglet(
+				ropertiesOnglet = new ViewAlignementResultOnglet(
+						(ViewAlignement) viewLocal,
 						(ViewAlignementResult) view, list);
 				ropertiesOnglet.updateOngletResultatInterface();
 				// /
 
+				String O1 = "/" + Acceuil.path + "/BachMark/Labo1.owl";
+				String O2 = "/" + Acceuil.path + "/BachMark/Labo2.owl";
+				Object[] elt = ctv1.getCheckedElements();
+				O1 = ((File) elt[0]).getPath();
+				O1 = O1.replaceAll("\\\\", "/");
+				O1 = "/" + O1;
+				System.out.println(O1);
+				O2 = ((File) elt[1]).getPath();
+				O2 = O2.replaceAll("\\\\", "/");
+				O2 = "/" + O2;
+				System.out.println(O2);
 				new Alignement(O1, O2, methodWord, methodSentence,
 						(ViewAlignement) viewLocal, getSite().getShell()
 								.getDisplay(), progressBar, list, combo_ling
 								.getText(), combo_hier.getText(),
 						ropertiesOnglet).start();
-				
+
 				ropertiesOnglet.updateOngletResultatInterface();
 
 				view.setFocus();

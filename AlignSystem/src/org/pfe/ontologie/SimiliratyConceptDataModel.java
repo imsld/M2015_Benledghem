@@ -25,10 +25,12 @@ public class SimiliratyConceptDataModel {
 				String sl = Iter.next();
 				String sh = Iter.next();
 				String ss = Iter.next();
-				String ismax = Iter.next();
+				String isLinguistiqueMax = Iter.next();
+				String isHierarchiqueMax = Iter.next();
+				String isSemantiqueMax = Iter.next();
 
 				SimiliratyConceptInformation ci = new SimiliratyConceptInformation(
-						c1, c2, sl, sh, ss, ismax);
+						c1, c2, sl, sh, ss, isLinguistiqueMax, isHierarchiqueMax, isSemantiqueMax);
 				similarityconcepts.add(ci);
 			}
 		}
