@@ -1,7 +1,6 @@
 package org.pfe.ontologie;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -101,9 +100,13 @@ public class Ontologie {
 							RDFS.domain, (RDFNode) null);
 					while (iter1.hasNext()) {
 						Statement stmt1 = iter1.nextStatement();
-						String domain = stmt1.getLiteral().getString();
+						//if (!stmt1.getObject().isLiteral())
+						//	continue;
+						String domain = (String) stmt1.getResource()
+								.getLocalName();//stmt1.getLiteral().getString();
+
 						list.add(domain);
-						list.add(stmt1.getLiteral().getDatatypeURI());
+						//list.add(stmt1.getLiteral().getDatatypeURI());
 
 					}
 					iter1 = model.listStatements(property, RDFS.range,
@@ -199,7 +202,6 @@ public class Ontologie {
 	public List<List<String>> getChildList(String classeURI) {
 
 		conceptChildren = new ArrayList<List<String>>();
-		
 
 		OntClass thing = ontologie.getOntClass(classeURI);
 		for (Iterator<OntClass> i = thing.listSubClasses(true); i.hasNext();) {
@@ -209,14 +211,21 @@ public class Ontologie {
 			listChild.add(classeChild.getURI());
 			conceptChildren.add(listChild);
 		}
-		
+
 		return conceptChildren;
 	}
 
 	public String getURI() {
 		ExtendedIterator<Ontology> iter = ontologie.listOntologies();
-		OntologyImpl onto = (OntologyImpl) iter.next();
-		return onto.getURI();
+		try {
+			OntologyImpl onto = (OntologyImpl) iter.next();
+			return onto.getURI();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			return "Rien";
+		}
+		
 	}
 
 }

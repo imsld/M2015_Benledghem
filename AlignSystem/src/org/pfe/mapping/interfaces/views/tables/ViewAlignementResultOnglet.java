@@ -34,7 +34,7 @@ public class ViewAlignementResultOnglet {
 	public void updateOngletResultatInterface() {
 		Composite composite_1 = new Composite(view.tabFolder, SWT.NONE);
 
-		AppSimiliratyConceptViewer table_concept_score = new AppSimiliratyConceptViewer(
+		AppSimiliratyConceptViewer table_concept_score = new AppSimiliratyConceptViewer(list,
 				composite_1, SWT.BORDER | SWT.V_SCROLL
 						| SWT.LAST_LINE_SELECTION | SWT.FULL_SELECTION);
 
@@ -62,7 +62,7 @@ public class ViewAlignementResultOnglet {
 
 	}
 
-	public void updateOngletAlignementInterface() {
+	public void updateOngletAlignementInterface(List<List<String>> list2) {
 		Composite composite_1 = new Composite(view.tabFolder, SWT.NONE);
 
 		AppSimiliratyConceptViewerAlignement table_concept_score = new AppSimiliratyConceptViewerAlignement(
@@ -70,7 +70,7 @@ public class ViewAlignementResultOnglet {
 						| SWT.LAST_LINE_SELECTION | SWT.FULL_SELECTION);
 
 		SimiliratyConceptDataModelAlignement model = new SimiliratyConceptDataModelAlignement(
-				list, viewLocal.btnRadioLig.getSelection(),
+				list2, viewLocal.btnRadioLig.getSelection(),
 				viewLocal.btnRadioHier.getSelection(),
 				viewLocal.btnRadioSem.getSelection());
 

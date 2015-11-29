@@ -1,6 +1,7 @@
 package org.pfe.mapping.interfaces.views.tables;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jface.viewers.ColumnLabelProvider;
@@ -22,9 +23,12 @@ public class AppSimiliratyConceptViewer extends TableViewer {
 	private TableEditor editor;
 	private Button button;
 	TableItem item;
+	List<List<String>> list;
 
-	public AppSimiliratyConceptViewer(Composite parent, int style) {
+	public AppSimiliratyConceptViewer(List<List<String>> list,
+			Composite parent, int style) {
 		super(parent, style);
+		this.list = list;
 		Table table = getTable();
 		GridData gridData = new GridData(SWT.FILL, SWT.FILL, true, true);
 		table.setLayoutData(gridData);
@@ -87,23 +91,24 @@ public class AppSimiliratyConceptViewer extends TableViewer {
 							.getControl(), SWT.CHECK);
 					Object element = cell.getElement();
 					button.setText(getText(element));
-					button.setSelection(((SimiliratyConceptInformation) element).IsMaxLinguistiqueScore());
+					button.setSelection(((SimiliratyConceptInformation) element)
+							.IsMaxLinguistiqueScore());
 					buttons.put(element, button);
-					
 
 					button.addSelectionListener(new SelectionAdapter() {
 						public void widgetSelected(SelectionEvent event) {
 							if (((SimiliratyConceptInformation) element)
 									.IsMaxLinguistiqueScore()) {
-							((SimiliratyConceptInformation) element).setMaxLinguistiqueScore(false);
-							}
-							else{
-								((SimiliratyConceptInformation) element).setMaxLinguistiqueScore(true);
+								((SimiliratyConceptInformation) element)
+										.setMaxLinguistiqueScore(false);
+							} else {
+								((SimiliratyConceptInformation) element)
+										.setMaxLinguistiqueScore(true);
 								String cpt1 = ((SimiliratyConceptInformation) element)
 										.getConcept_o1();
 								String cpt2 = ((SimiliratyConceptInformation) element)
 										.getConcept_o2();
-								
+
 								TableItem[] selection = getTable().getItems();
 								for (int i = 0; i < selection.length; i++) {
 									SimiliratyConceptInformation elt = (SimiliratyConceptInformation) selection[i]
@@ -113,12 +118,22 @@ public class AppSimiliratyConceptViewer extends TableViewer {
 													.equals(cpt2))
 											&& (elt.IsMaxLinguistiqueScore())) {
 										elt.setMaxLinguistiqueScore(false);
-										(getTable().getItems())[i]
-												.setData(elt);
-										Button b = ((Button) (getTable().getChildren())[(i*3)]);
+										(getTable().getItems())[i].setData(elt);
+										Button b = ((Button) (getTable()
+												.getChildren())[(i * 3)]);
 										b.setSelection(false);
-										
 										break;
+									}
+								}
+								for(int j = 0; j<list.size(); j++ ){
+									List<String> l = list.get(j);
+									if (l.get(0).equals((cpt1)))
+									{
+										if (l.get(1).equals((cpt2)))
+											l.set(5, "true");
+										else
+									        l.set(5, "false");
+										list.set(j, l);
 									}
 								}
 							}
@@ -160,23 +175,24 @@ public class AppSimiliratyConceptViewer extends TableViewer {
 							.getControl(), SWT.CHECK);
 					Object element = cell.getElement();
 					button.setText(getText(element));
-					button.setSelection(((SimiliratyConceptInformation) element).IsMaxHierarchiqueScore());
+					button.setSelection(((SimiliratyConceptInformation) element)
+							.IsMaxHierarchiqueScore());
 					buttons.put(element, button);
-					
 
 					button.addSelectionListener(new SelectionAdapter() {
 						public void widgetSelected(SelectionEvent event) {
 							if (((SimiliratyConceptInformation) element)
 									.IsMaxHierarchiqueScore()) {
-							((SimiliratyConceptInformation) element).setMaxHierarchiqueScore(false);
-							}
-							else{
-								((SimiliratyConceptInformation) element).setMaxHierarchiqueScore(true);
+								((SimiliratyConceptInformation) element)
+										.setMaxHierarchiqueScore(false);
+							} else {
+								((SimiliratyConceptInformation) element)
+										.setMaxHierarchiqueScore(true);
 								String cpt1 = ((SimiliratyConceptInformation) element)
 										.getConcept_o1();
 								String cpt2 = ((SimiliratyConceptInformation) element)
 										.getConcept_o2();
-								
+
 								TableItem[] selection = getTable().getItems();
 								for (int i = 0; i < selection.length; i++) {
 									SimiliratyConceptInformation elt = (SimiliratyConceptInformation) selection[i]
@@ -186,12 +202,22 @@ public class AppSimiliratyConceptViewer extends TableViewer {
 													.equals(cpt2))
 											&& (elt.IsMaxHierarchiqueScore())) {
 										elt.setMaxHierarchiqueScore(false);
-										(getTable().getItems())[i]
-												.setData(elt);
-										Button b = ((Button) (getTable().getChildren())[(i*3)+1]);
+										(getTable().getItems())[i].setData(elt);
+										Button b = ((Button) (getTable()
+												.getChildren())[(i * 3) + 1]);
 										b.setSelection(false);
-										
 										break;
+									}
+								}
+								for(int j = 0; j<list.size(); j++ ){
+									List<String> l = list.get(j);
+									if (l.get(0).equals((cpt1)))
+									{
+										if (l.get(1).equals((cpt2)))
+											l.set(6, "true");
+										else
+									        l.set(6, "false");
+										list.set(j, l);
 									}
 								}
 							}
@@ -233,23 +259,24 @@ public class AppSimiliratyConceptViewer extends TableViewer {
 							.getControl(), SWT.CHECK);
 					Object element = cell.getElement();
 					button.setText(getText(element));
-					button.setSelection(((SimiliratyConceptInformation) element).IsMaxSemantiqueScore());
+					button.setSelection(((SimiliratyConceptInformation) element)
+							.IsMaxSemantiqueScore());
 					buttons.put(element, button);
-					
 
 					button.addSelectionListener(new SelectionAdapter() {
 						public void widgetSelected(SelectionEvent event) {
 							if (((SimiliratyConceptInformation) element)
 									.IsMaxSemantiqueScore()) {
-							((SimiliratyConceptInformation) element).setMaxSemantiqueScore(false);
-							}
-							else{
-								((SimiliratyConceptInformation) element).setMaxSemantiqueScore(true);
+								((SimiliratyConceptInformation) element)
+										.setMaxSemantiqueScore(false);
+							} else {
+								((SimiliratyConceptInformation) element)
+										.setMaxSemantiqueScore(true);
 								String cpt1 = ((SimiliratyConceptInformation) element)
 										.getConcept_o1();
 								String cpt2 = ((SimiliratyConceptInformation) element)
 										.getConcept_o2();
-								
+
 								TableItem[] selection = getTable().getItems();
 								for (int i = 0; i < selection.length; i++) {
 									SimiliratyConceptInformation elt = (SimiliratyConceptInformation) selection[i]
@@ -259,12 +286,25 @@ public class AppSimiliratyConceptViewer extends TableViewer {
 													.equals(cpt2))
 											&& (elt.IsMaxSemantiqueScore())) {
 										elt.setMaxSemantiqueScore(false);
-										(getTable().getItems())[i]
-												.setData(elt);
-										Button b = ((Button) (getTable().getChildren())[(i*3)+2]);
+										(getTable().getItems())[i].setData(elt);
+										Button b = ((Button) (getTable()
+												.getChildren())[(i * 3) + 2]);
 										b.setSelection(false);
 										
 										break;
+
+									}
+								}
+								
+								for(int j = 0; j<list.size(); j++ ){
+									List<String> l = list.get(j);
+									if (l.get(0).equals((cpt1)))
+									{
+										if (l.get(1).equals((cpt2)))
+											l.set(7, "true");
+										else
+									        l.set(7, "false");
+										list.set(j, l);
 									}
 								}
 							}

@@ -65,6 +65,7 @@ public class ViewAlignement extends ViewPart {
 
 	public ProgressBar progressBar;
 
+	List<List<String>> list = new ArrayList<List<String>>();;
 	@PostConstruct
 	public void createPartControl(Composite parent) {
 
@@ -160,10 +161,18 @@ public class ViewAlignement extends ViewPart {
 		btnRadioSem.setSelection(true);
 		btnRadioSem.setText("S\u00E9mantique");
 		new Label(grpVisualisation, SWT.NONE);
-		new Label(grpVisualisation, SWT.NONE);
 		
 		Button btnVisualisation = new Button(grpVisualisation, SWT.NONE);
 		btnVisualisation.setText("Visualisation");
+		
+				btnVisualisation.addSelectionListener(new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent event) {
+						ropertiesOnglet.updateOngletAlignementInterface(list);
+					}
+				});
+		
+		Button btnSauvegarder = new Button(grpVisualisation, SWT.NONE);
+		btnSauvegarder.setText("Sauvegarder");
 
 		Group grp_parameters = new Group(composite_3, SWT.NONE);
 		grp_parameters.setText("Configuration");
@@ -304,19 +313,13 @@ public class ViewAlignement extends ViewPart {
 		combo_hier.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
 				false, 1, 1));
 		combo_hier.select(5);
-
-		btnVisualisation.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent event) {
-				ropertiesOnglet.updateOngletAlignementInterface();
-			}
-		});
 		
 		btn_align.addSelectionListener(new SelectionAdapter() {
 
 			String methodWord = null;
 			String methodSentence = null;
 
-			List<List<String>> list = new ArrayList<List<String>>();
+			//list = new ArrayList<List<String>>();
 
 			public void widgetSelected(SelectionEvent event) {
 
